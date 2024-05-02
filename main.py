@@ -1,5 +1,5 @@
 import streamlit as st
-import cv2
+from PIL import Image
 import numpy as np
 from tensorflow.keras.models import load_model
 
@@ -20,8 +20,9 @@ out = ['Aloevera', 'Amla', 'Amruthaballi', 'Arali', 'Astma_weed', 'Badipala', 'B
 
 def preprocess_image(image):
     # Resize image to match model input size and normalize pixel values
-    img = cv2.resize(image, (224, 224)) / 255.
-    return img
+    img = image.resize((224, 224))  # Resize image
+    img_array = np.array(img) / 255.  # Convert image to numpy array and normalize pixel values
+    return img_array
 
 
 def predict_plant_species(image):
@@ -42,7 +43,7 @@ uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "png"])
 
 if uploaded_file is not None:
     # Read the uploaded image
-    image = cv2.imdecode(np.fromstring(uploaded_file.read(), np.uint8), 1)
+    image = Image.open(uploaded_file)
 
     # Display the uploaded image
     st.image(image, caption='Uploaded Image', use_column_width=True)
