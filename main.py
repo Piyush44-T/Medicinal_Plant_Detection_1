@@ -4,7 +4,7 @@ import numpy as np
 from tensorflow.keras.models import load_model
 
 # Load the trained model
-main_model = load_model('Model1.keras')  # Replace 'your_model_path.h5' with the actual path to your model
+main_model = load_model('Model1.keras')  
 
 # List of medicinal plant names
 out = ['Aloevera', 'Amla', 'Amruthaballi', 'Arali', 'Astma_weed', 'Badipala', 'Balloon_Vine', 'Bamboo', 'Beans',
